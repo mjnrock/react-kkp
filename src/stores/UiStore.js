@@ -1,12 +1,12 @@
 import { action, observable } from "mobx";
 
 class UiStore {
-  @observable theme = "day";
+    @observable theme = "day";
 
-  @action
-  toggleTheme = () => {
-    this.theme = this.theme === "day" ? "night" : "day";
-  };
+    @action
+    toggleTheme = () => {
+        this.theme = this.theme === "day" ? "night" : "day";
+    };
 }
 
 export default new UiStore();
