@@ -7,9 +7,7 @@ import TextAlignment from "./TextAlignment";
 @observer
 export default class TextToolbar extends React.Component {
     listener(e, eventType, command) {
-        this.props.store.MediaStudioStore.setCommand( `text.${ command }`);
-
-        console.log(this.props.store.MediaStudioStore.getCommand());
+        this.props.listener(e, eventType, `text.${ command }`);
     }
 
     render() {
