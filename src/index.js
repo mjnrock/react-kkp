@@ -5,9 +5,10 @@ import App from "./App";
 
 import { Provider } from "mobx-react";
 import UiStore from "./stores/UiStore";
+import DifferentStore from "./stores/DifferentStore";
 
 const Root = (
-    <Provider UiStore={ UiStore }>
+    <Provider store={{ UiStore, DifferentStore }}>
         <App />
     </Provider>
 );

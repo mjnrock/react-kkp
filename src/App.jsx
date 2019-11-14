@@ -23,21 +23,33 @@ const Headline = styled.h1`
     `};
 `;
 
-@inject("UiStore")
+@inject("store")
 @observer
 class App extends Component {
     render() {
-        const { UiStore } = this.props;
+        const { UiStore, DifferentStore } = this.props.store;
 
         return (
-            <div
-                className="App"
-                onClick={e => {
-                    e.preventDefault();
-                    UiStore.toggleTheme();
-                }}
-            >
-                <Headline theme={ UiStore.theme }>Hey!</Headline>
+            <div>
+                <div
+                    className="App"
+                    onClick={e => {
+                        e.preventDefault();
+                        DifferentStore.setText("cats!");
+                    }}
+                >
+                    Click this
+                </div>
+                <div
+                    className="App"
+                    onClick={e => {
+                        e.preventDefault();
+                        UiStore.toggleTheme();
+                    }}
+                >
+                    <div>{ DifferentStore.text }</div>
+                    <Headline theme={ UiStore.theme }>Hey!</Headline>
+                </div>
             </div>
         );
     }
