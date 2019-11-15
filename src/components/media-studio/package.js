@@ -1,11 +1,11 @@
 import Store from "./lib/MediaStudioStore";
 
 import MediaStudio from "./MediaStudio";
-import Toolbox from "./toolbox/package";
+import Toolboxes from "./toolboxes/package";
 
 export default {
     Store,
 
     MediaStudio,
-    Toolbox
+    Toolboxes
 };

@@ -1,10 +1,10 @@
 import React from "react";
 
-import Button from "./../../Button";
+import Button from "components/Button";
 
-export default class TextFormatting extends React.Component {
+export default class TextAlignment extends React.Component {
     listener(e, eventType, command) {
-        this.props.listener(e, eventType, `format.${ command }`);
+        this.props.listener(e, eventType, `align.${ command }`);
     }
 
     render() {
@@ -14,34 +14,34 @@ export default class TextFormatting extends React.Component {
             >
                 <Button
                     listener={ this.listener.bind(this) }
-                    command={ `bold` }
+                    command={ `left` }
                     className={ `btn-outline-secondary pa3 pb2` }
                 >
-                    <i className="material-icons">format_bold</i>
+                    <i className="material-icons">format_align_left</i>
                 </Button>
                 
                 <Button
                     listener={ this.listener.bind(this) }
-                    command={ `italic` }
+                    command={ `center` }
                     className={ `btn-outline-secondary pa3 pb2` }
                 >
-                    <i className="material-icons">format_italic</i>
+                    <i className="material-icons">format_align_center</i>
                 </Button>
                 
                 <Button
                     listener={ this.listener.bind(this) }
-                    command={ `underline` }
+                    command={ `right` }
                     className={ `btn-outline-secondary pa3 pb2` }
                 >
-                    <i className="material-icons">format_underlined</i>
+                    <i className="material-icons">format_align_right</i>
                 </Button>
                 
                 <Button
                     listener={ this.listener.bind(this) }
-                    command={ `strikethrough` }
+                    command={ `justify` }
                     className={ `btn-outline-secondary pa3 pb2` }
                 >
-                    <i className="material-icons"><i className="material-icons">strikethrough_s</i></i>
+                    <i className="material-icons">format_align_justify</i>
                 </Button>
             </div>
         );

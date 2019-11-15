@@ -1,10 +1,8 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
 import TextFormatting from "./TextFormatting";
 import TextAlignment from "./TextAlignment";
+import TextFont from "./TextFont";
 
-@inject("store")
-@observer
 export default class TextToolbar extends React.Component {
     listener(e, eventType, command) {
         this.props.listener(e, eventType, `text.${ command }`);
@@ -12,7 +10,9 @@ export default class TextToolbar extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div
+                className={ `container ${ this.props.className }` }
+            >
                 <div className="row">
                     <TextFormatting
                         listener={ this.listener.bind(this) }
@@ -21,6 +21,12 @@ export default class TextToolbar extends React.Component {
                 </div>
                 <div className="row mt2">
                     <TextAlignment
+                        listener={ this.listener.bind(this) }
+                        // className={ `col` }
+                    />
+                </div>
+                <div className="row mt2">
+                    <TextFont
                         listener={ this.listener.bind(this) }
                         // className={ `col` }
                     />
