@@ -6,12 +6,12 @@ import { SliderPicker } from "react-color";
 
 export default class ColorToolbar extends React.Component {
     listener(e, eventType, command = null) {
-        let prefix = this.props.commandPrefix ? this.props.commandPrefix : "";
+        let prefix = this.props.commandPrefix ? `${ this.props.commandPrefix }.` : "";
 
         if(command) {
-            this.props.listener(e, eventType, `${ prefix }.${ command }`);
+            this.props.listener(e, eventType, `${ prefix }${ command }`);
         } else {
-            this.props.listener(e, eventType, `${ prefix }.${ e.target.getAttribute("command") }:${ e.target.value }`);
+            this.props.listener(e, eventType, `${ prefix }${ e.target.getAttribute("command") }:${ e.target.value }`);
         }
     }
 
