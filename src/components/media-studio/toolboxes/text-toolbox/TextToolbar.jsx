@@ -1,4 +1,6 @@
 import React from "react";
+import ColorToolbar from "./../color-toolbox/ColorToolbar";
+
 import TextFormatting from "./TextFormatting";
 import TextAlignment from "./TextAlignment";
 import TextFont from "./TextFont";
@@ -16,19 +18,24 @@ export default class TextToolbar extends React.Component {
                 <div className="row">
                     <TextFormatting
                         listener={ this.listener.bind(this) }
-                        // className={ `col` }
+                        className={ `col` }
                     />
                 </div>
                 <div className="row mt2">
                     <TextAlignment
                         listener={ this.listener.bind(this) }
-                        // className={ `col` }
+                        className={ `col` }
                     />
                 </div>
                 <div className="row mt2">
                     <TextFont
                         listener={ this.listener.bind(this) }
-                        // className={ `col` }
+                        className={ `col` }
+                    />
+                </div>
+                <div className="row mt2">
+                    <ColorToolbar
+                        listener={ this.listener.bind(this) }
                     />
                 </div>
             </div>

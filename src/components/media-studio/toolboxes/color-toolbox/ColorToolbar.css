@@ -1,0 +1,12 @@
+.slider-picker > div {
+    height: 80px !important;
+}
+
+.slider-picker > div:nth-child(2),
+.slider-picker > div:nth-child(2) > div > div > div {
+    height: 40px !important;
+}
+
+.hue-horizontal > div > div {
+    height: 82px !important;
+}

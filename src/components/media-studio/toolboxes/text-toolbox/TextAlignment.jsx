@@ -9,40 +9,42 @@ export default class TextAlignment extends React.Component {
 
     render() {
         return (
-            <div
-                className={ `btn-group ${ this.props.className }` }
-            >
-                <Button
-                    listener={ this.listener.bind(this) }
-                    command={ `left` }
-                    className={ `btn-outline-secondary pa3 pb2` }
+            <div className="col">
+                <div
+                    className={ `btn-group ${ this.props.className }` }
                 >
-                    <i className="material-icons">format_align_left</i>
-                </Button>
-                
-                <Button
-                    listener={ this.listener.bind(this) }
-                    command={ `center` }
-                    className={ `btn-outline-secondary pa3 pb2` }
-                >
-                    <i className="material-icons">format_align_center</i>
-                </Button>
-                
-                <Button
-                    listener={ this.listener.bind(this) }
-                    command={ `right` }
-                    className={ `btn-outline-secondary pa3 pb2` }
-                >
-                    <i className="material-icons">format_align_right</i>
-                </Button>
-                
-                <Button
-                    listener={ this.listener.bind(this) }
-                    command={ `justify` }
-                    className={ `btn-outline-secondary pa3 pb2` }
-                >
-                    <i className="material-icons">format_align_justify</i>
-                </Button>
+                    <Button
+                        listener={ this.listener.bind(this) }
+                        command={ `left` }
+                        className={ `btn-outline-secondary pa3 pb2` }
+                    >
+                        <i className="material-icons">format_align_left</i>
+                    </Button>
+                    
+                    <Button
+                        listener={ this.listener.bind(this) }
+                        command={ `center` }
+                        className={ `btn-outline-secondary pa3 pb2` }
+                    >
+                        <i className="material-icons">format_align_center</i>
+                    </Button>
+                    
+                    <Button
+                        listener={ this.listener.bind(this) }
+                        command={ `right` }
+                        className={ `btn-outline-secondary pa3 pb2` }
+                    >
+                        <i className="material-icons">format_align_right</i>
+                    </Button>
+                    
+                    <Button
+                        listener={ this.listener.bind(this) }
+                        command={ `justify` }
+                        className={ `btn-outline-secondary pa3 pb2` }
+                    >
+                        <i className="material-icons">format_align_justify</i>
+                    </Button>
+                </div>
             </div>
         );
     }

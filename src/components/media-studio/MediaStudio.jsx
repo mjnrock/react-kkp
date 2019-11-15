@@ -13,7 +13,7 @@ export default class MediaStudio extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Toolboxes.TextToolbox.TextToolbar
                     listener={ this.listener.bind(this) }
                 />
