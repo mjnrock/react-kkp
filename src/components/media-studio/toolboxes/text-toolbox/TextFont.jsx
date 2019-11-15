@@ -15,7 +15,7 @@ export default class TextFont extends React.Component {
     render() {
         return (
             <div
-                className={ `${ this.props.className }` }
+                className={ `mt2 ${ this.props.className }` }
             >                
                 <select
                     className="ba br2 pa3"
@@ -31,6 +31,7 @@ export default class TextFont extends React.Component {
                 </select>
                 
                 <CirclePicker
+                    className="mt3"
                     command={ `color` }
                     onChangeComplete={ (e) => this.listener(e, "change", `color:${ e.hex }`) }
                 />
