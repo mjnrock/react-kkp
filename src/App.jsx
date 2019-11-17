@@ -5,9 +5,9 @@ import MediaStudio from "./components/media-studio/package";
 import Animus from "./lib/animus/package";
 
 let now = Date.now();
-let fs = new Animus.FrameSequence([
+let fs = new Animus.NodeSequence([
     //? Example transformation and contingent progression into _state.next
-    new Animus.Frame({}, (frame, data) => {
+    new Animus.Node({}, (frame, data) => {
         let r = Math.random() * 100;
 
         if(r > 95) {

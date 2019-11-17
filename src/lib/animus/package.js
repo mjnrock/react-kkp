@@ -1,11 +1,11 @@
 import AState from "./AState";
 import AEvents from "./AEvents";
-import Frame from "./Frame";
-import FrameSequence from "./FrameSequence";
+import Node from "./Node";
+import NodeSequence from "./NodeSequence";
 
 export default {
     AState,
     AEvents,
-    Frame,
-    FrameSequence
+    Node,
+    NodeSequence
 };

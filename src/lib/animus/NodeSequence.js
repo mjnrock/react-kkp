@@ -1,7 +1,7 @@
 import AEvents from "./AEvents";
-import Frame from "./Frame";
+import Node from "./Node";
 
-export default class FrameSequence extends AEvents {
+export default class NodeSequence extends AEvents {
     constructor(frames = []) {
         super();
 
@@ -14,14 +14,14 @@ export default class FrameSequence extends AEvents {
         });
         
         this._on("next", (name, scope, state, ...args) => {
-            let frame = scope.GetFrame(state.index),
+            let frame = scope.GetNode(state.index),
                 next = frame.getNext();
             
             scope._prop("ticks", +state.ticks + 1);
 
             let index = state.index;
 
-            if(index + 1 >= scope.Frames.length) {
+            if(index + 1 >= scope.Nodes.length) {
                 index = 0;
             } else {
                 ++index;
@@ -46,30 +46,30 @@ export default class FrameSequence extends AEvents {
             return false;
         });
 
-        this.Frames = [];
+        this.Nodes = [];
         for(let i in frames) {
             let frame = frames[ i ];
 
-            if(frame instanceof Frame) {
-                this.Frames.push(frame);
+            if(frame instanceof Node) {
+                this.Nodes.push(frame);
             } else if(Array.isArray(frame)) {
                 let [ data, next, state ] = frame;
 
-                this.Frames.push(new Frame(data, next, state));
+                this.Nodes.push(new Node(data, next, state));
             }
         }
     }
 
-    GetFrame(index = 0) {
-        return this.Frames[ index ];
+    GetNode(index = 0) {
+        return this.Nodes[ index ];
     }
-    SetFrame(index, frame) {
-        this.Frames[ index ] = frame;
+    SetNode(index, frame) {
+        this.Nodes[ index ] = frame;
 
         return this;
     }
-    AddFrame(frame) {
-        this.Frames.push(frame);
+    AddNode(frame) {
+        this.Nodes.push(frame);
 
         return this;
     }
