@@ -1,7 +1,7 @@
 import AEvents from "./AEvents";
 import Node from "./Node";
 
-export default class NodeSequence extends AEvents {
+export default class Sequencer extends AEvents {
     constructor(frames = []) {
         super();
 
