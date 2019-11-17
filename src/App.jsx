@@ -20,14 +20,18 @@ let fs = new Animus.FrameSequence([
     [ {}, 600 ]
 ]);
 
+fs._subscribe("next", (scope, result) => {
+    console.log(result, scope._prop("index"));
+});
+
 console.log(fs);
 
 let fps = 5,
     spf = 1000 / fps;
 
-// setInterval(() => {
-//     fs._trigger("next", 50)
-// }, spf);
+setInterval(() => {
+    fs._trigger("next", 50)
+}, spf);
 
 
 

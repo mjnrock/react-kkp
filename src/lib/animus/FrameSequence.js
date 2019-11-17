@@ -16,6 +16,8 @@ export default class FrameSequence extends AEvents {
         this._on("next", (name, scope, state, ...args) => {
             let frame = scope.GetFrame(state.index),
                 next = frame.getNext();
+            
+            scope._prop("ticks", +state.ticks + 1);
 
             let index = state.index;
 
@@ -29,17 +31,19 @@ export default class FrameSequence extends AEvents {
                 if(Date.now() >= state.previous + next) {
                     scope._prop("index", index);
                     scope._prop("previous", Date.now());
+
+                    return true;
                 }
             } else if(typeof next === "function") {
                 if(next(frame, frame._getState().data, scope, ...args) === true) {
                     scope._prop("index", index);
                     scope._prop("previous", Date.now());
+
+                    return true;
                 }
             }
-            
-            scope._prop("ticks", +state.ticks + 1);
 
-            console.log(state);
+            return false;
         });
 
         this.Frames = [];
