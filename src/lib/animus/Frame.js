@@ -28,4 +28,10 @@ export default class Frame extends AState {
 
         return this;
     }
+    
+    setData(data) {
+        this._prop("data", data);
+
+        return this;
+    }
 }

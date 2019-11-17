@@ -6,20 +6,14 @@ import Animus from "./lib/animus/package";
 
 let now = Date.now();
 let fs = new Animus.FrameSequence([
-    new Animus.Frame({
-        cats: 0
-    }, 950),
-    new Animus.Frame({
-        fish: 1000
-    }, 1500),
-    new Animus.Frame({
-        dogs: -1000
-    }, 200)
+    [ {}, 500 ],
+    [ {}, 1500 ],
+    [ {}, 3000 ]
 ]);
 
 console.log(fs);
 
-let fps = 10,
+let fps = 5,
     spf = 1000 / fps;
 
 setInterval(() => {

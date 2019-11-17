@@ -1,4 +1,5 @@
 import AEvents from "./AEvents";
+import Frame from "./Frame";
 
 export default class FrameSequence extends AEvents {
     constructor(frames = []) {
@@ -38,10 +39,21 @@ export default class FrameSequence extends AEvents {
             
             scope._prop("ticks", +state.ticks + 1);
 
-            console.log(state);
+            console.log(frame);
         });
 
-        this.Frames = frames;
+        this.Frames = [];
+        for(let i in frames) {
+            let frame = frames[ i ];
+
+            if(frame instanceof Frame) {
+                this.Frames.push(frame);
+            } else if(Array.isArray(frame)) {
+                let [ data, next, state ] = frame;
+
+                this.Frames.push(new Frame(data, next, state));
+            }
+        }
     }
 
     GetFrame(index = 0) {
