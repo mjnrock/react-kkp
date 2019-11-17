@@ -39,7 +39,7 @@ export default class FrameSequence extends AEvents {
             
             scope._prop("ticks", +state.ticks + 1);
 
-            console.log(frame);
+            console.log(state);
         });
 
         this.Frames = [];

@@ -6,9 +6,18 @@ import Animus from "./lib/animus/package";
 
 let now = Date.now();
 let fs = new Animus.FrameSequence([
+    //? Example transformation and contingent progression into _state.next
+    new Animus.Frame({}, (frame, data) => {
+        let r = Math.random() * 100;
+
+        if(r > 95) {
+            frame.setDatum("cats", (frame.getDatum("cats") || 0) + 500);
+        }
+
+        return Math.random() * 100 > 40 ? true : false;
+    }),
     [ {}, 500 ],
-    [ {}, 1500 ],
-    [ {}, 3000 ]
+    [ {}, 600 ]
 ]);
 
 console.log(fs);
@@ -16,9 +25,9 @@ console.log(fs);
 let fps = 5,
     spf = 1000 / fps;
 
-setInterval(() => {
-    fs._trigger("next", 50)
-}, spf);
+// setInterval(() => {
+//     fs._trigger("next", 50)
+// }, spf);
 
 
 
