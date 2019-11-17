@@ -7,18 +7,14 @@ export default class Sequencer extends AEvents {
 
         this._setState({
             index: 0,
-            ticks: 0,
             start: Date.now(),
-            previous: null,
-            repeat: true
+            previous: null
         });
         
         this._on("next", (name, scope, state, ...args) => {
             let frame = scope.GetNode(state.index),
                 next = frame.getNext();
-            
-            scope._prop("ticks", +state.ticks + 1);
-
+                
             let index = state.index;
 
             if(index + 1 >= scope.Nodes.length) {
