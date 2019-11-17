@@ -4,7 +4,6 @@ import { inject, observer } from "mobx-react";
 import MediaStudio from "./components/media-studio/package";
 import Animus from "./lib/animus/package";
 
-let now = Date.now();
 let fs = new Animus.Sequencer([
     //? Example transformation and contingent progression into _state.next
     new Animus.Node({}, (frame, data) => {
