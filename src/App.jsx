@@ -13,21 +13,10 @@ class App extends Component {
             //? Example transformation and contingent progression into _state.next
             [ "text", 1000 ],
             [ "hello", 300 ],
-            [ "yo", 2000 ]
-        ]);
-
-        // fs._listen("next", (scope, result) => {
-        //     console.log(result, scope._prop("index"));
-        // });
-
-        console.log(fs);
-
-        let fps = 5,
-            spf = 1000 / fps;
-
-        setInterval(() => {
-            fs._trigger("next", 50)
-        }, spf);
+            [ "yo", 700 ],
+            [ "Lorem", 500 ],
+            [ "^!#@(*$&^o", 650 ]
+        ]).Start(10);
 
     }
 
