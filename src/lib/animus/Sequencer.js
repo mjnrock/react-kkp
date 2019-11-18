@@ -22,6 +22,8 @@ export default class Sequencer extends AAnimus {
             } else {
                 ++index;
             }
+
+            console.log(node);
     
             if(typeof next === "number") {
                 if(Date.now() >= state.previous + next) {

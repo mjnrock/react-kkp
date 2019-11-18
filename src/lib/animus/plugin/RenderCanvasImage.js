@@ -1,6 +1,6 @@
-import Sequencer from "./Sequencer";
+import Sequencer from "../Sequencer";
 
-export default class RenderCanvasText extends Sequencer {
+export default class RenderCanvasImage extends Sequencer {
     constructor(htmlCanvas, nodes = [], fps = 5) {
         super(nodes);
 
@@ -34,13 +34,14 @@ export default class RenderCanvasText extends Sequencer {
     Draw(target) {
         if(this.Canvas) {
             let ctx = this.Canvas.getContext("2d");
-            ctx.font = "64pt Arial";
+            
+            console.log(target.GetActiveNode());
 
             ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
-            ctx.fillText(
-                target.GetActiveNode().prop("data"),
-                Math.random() * 500,
-                Math.random() * 500
+            ctx.drawImage(
+                target.GetActiveNode().getDatum("image"),
+                0,
+                0
             );
         }
     }

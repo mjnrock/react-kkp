@@ -9,13 +9,9 @@ import Animus from "./lib/animus/package";
 @observer
 class App extends Component {
     componentDidMount() {
-        let fs = new Animus.RenderCanvasText(document.getElementById("animus-canvas"), [
-            [ "text", 1000 ],
-            [ "hello", 300 ],
-            [ "yo", 700 ],
-            [ "Lorem", 500 ],
-            [ "^!#@(*$&^o", 650 ]
-        ]).Start(10);
+        let fs = new Animus.Plugin.RenderCanvasImage(document.getElementById("animus-canvas"), [
+            new Animus.Plugin.ImageNode("./raccoon.png")
+        ]).Start(2);
 
         console.log(fs);
 
