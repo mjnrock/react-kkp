@@ -34,6 +34,14 @@ export default class MediaStudio extends React.Component {
                         className="ba br2 pa3"
                         listener={ this.listener.bind(this) }
                     />
+                </div>                
+
+                <div>
+                    <canvas
+                        id="ms-canvas"
+                        width={ 500 }
+                        height={ 500 }
+                    ></canvas>
                 </div>
 
                 <div>

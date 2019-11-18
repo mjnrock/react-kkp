@@ -45,19 +45,19 @@ export default class CameraToolbar extends React.Component {
                             className="btn btn-outline-success"
                             onClick={ this.StartVideo.bind(this) }
                         >
-                            <i class="material-icons">play_arrow</i>
+                            <i className="material-icons">play_arrow</i>
                         </button>
                         <button
                             className="btn btn-outline-danger"
                             onClick={ this.StopVideo.bind(this) }
                         >
-                            <i class="material-icons">stop</i>
+                            <i className="material-icons">stop</i>
                         </button>
                         <button
-                            className="btn btn-outline-secondary"
+                            className="btn btn-outline-primary"
                             onClick={ this.CaptureVideo.bind(this) }
                         >
-                            <i class="material-icons">stop</i>
+                            <i className="material-icons">camera_alt</i>
                         </button>
                     </div>
 
@@ -69,14 +69,6 @@ export default class CameraToolbar extends React.Component {
                             height: "100%",
                         }}
                     ></video>
-                </div>
-
-                <div>
-                    <canvas
-                        id="ms-canvas"
-                        width={ 500 }
-                        height={ 500 }
-                    ></canvas>
                 </div>
             </div>
         );
