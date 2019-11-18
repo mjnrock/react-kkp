@@ -1,7 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { fabric as Fabric } from "fabric";
-import Webcam from "react-webcam";
 
 import Toolboxes from "./toolboxes/package";
 
@@ -68,7 +67,7 @@ export default class MediaStudio extends React.Component {
     }
 
     render() {
-        let MS = this.props.store.MediaStudioStore;
+        // let MS = this.props.store.MediaStudioStore;
 
         return (
             <div className="container">

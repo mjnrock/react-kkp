@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 
 import MediaStudio from "./components/media-studio/package";
-import Animus from "./lib/animus/package";
+// import Animus from "./lib/animus/package";
 
 @inject("store")
 @observer
