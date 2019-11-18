@@ -10,8 +10,9 @@ import Animus from "./lib/animus/package";
 class App extends Component {
     componentDidMount() {
         let fs = new Animus.Plugin.RenderCanvasImage(document.getElementById("animus-canvas"), [
-            new Animus.Plugin.ImageNode("./raccoon.png")
-        ]).Start(2);
+            new Animus.Plugin.ImageNode("raccoon.png"),
+            new Animus.Plugin.ImageNode("Pusheen.png")
+        ]).Start(10);
 
         console.log(fs);
 

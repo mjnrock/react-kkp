@@ -35,9 +35,10 @@ export default class RenderCanvasImage extends Sequencer {
         if(this.Canvas) {
             let ctx = this.Canvas.getContext("2d");
             
-            console.log(target.GetActiveNode());
+            // console.log(target.GetActiveNode());
 
             ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
+            // console.log(target.GetActiveNode().getDatum("image"))
             ctx.drawImage(
                 target.GetActiveNode().getDatum("image"),
                 0,

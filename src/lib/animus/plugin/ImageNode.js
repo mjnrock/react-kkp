@@ -4,8 +4,6 @@ export default class ImageNode extends Node {
     constructor(uri, next, state = {}) {
         super({}, next, state);
 
-        // this.on("image", () => console.log("Loaded"));
-
         let _img = new Image();
         _img.onload = function() {
             this.prop("data", {
@@ -13,8 +11,7 @@ export default class ImageNode extends Node {
                 uri: uri
             });
             this.prop("next", () => true);
-            console.log("Loaded");
-        }
+        }.bind(this);
         _img.src = uri;
     }
 }

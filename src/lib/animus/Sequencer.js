@@ -23,7 +23,7 @@ export default class Sequencer extends AAnimus {
                 ++index;
             }
 
-            console.log(node);
+            // console.log(node);
     
             if(typeof next === "number") {
                 if(Date.now() >= state.previous + next) {
