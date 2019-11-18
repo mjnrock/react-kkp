@@ -13,23 +13,8 @@ export default class Sequencer extends AAnimus {
             hooks: {}
         });
 
-        
-
         this.Nodes = [];
-        for(let i in nodes) {
-            let node = nodes[ i ];
-
-            if(node instanceof Node) {
-                this.Nodes.push(node);
-            } else if(Array.isArray(node)) {
-                let [ data, next, state ] = node;
-
-                this.Nodes.push(new Node(data, next, state));
-            }
-        }
-
-
-
+        this.setNodes(nodes);
         
         this.on("start", (target, state, ...args) => {
             this.prop("index", 0);
@@ -99,6 +84,23 @@ export default class Sequencer extends AAnimus {
 
             this.prop("index", index);
         });
+    }
+
+    setNodes(nodes = []) {
+        this.Nodes = [];
+        for(let i in nodes) {
+            let node = nodes[ i ];
+
+            if(node instanceof Node) {
+                this.Nodes.push(node);
+            } else if(Array.isArray(node)) {
+                let [ data, next, state ] = node;
+
+                this.Nodes.push(new Node(data, next, state));
+            }
+        }
+        
+        return this;
     }
 
     Size(zeroIndexed = false) {
