@@ -1,5 +1,5 @@
 import AState from "./AState";
-import AEvents from "./AEvents";
+import AAnimus from "./AAnimus";
 import Node from "./Node";
 import Sequencer from "./Sequencer";
 
@@ -7,7 +7,7 @@ import RenderCanvas from "./RenderCanvas";
 
 export default {
     AState,
-    AEvents,
+    AAnimus,
     Node,
     Sequencer,
 

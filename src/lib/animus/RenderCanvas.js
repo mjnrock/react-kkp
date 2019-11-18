@@ -8,7 +8,7 @@ export default class RenderCanvas extends Sequencer {
         this.Loop = null;
 
         this._prop("fps", fps);
-        this._listen("next", this.nextListener.bind(this));
+        this._listen("next", this.drawListener.bind(this));
     }
 
     Start(fps = 5) {
@@ -25,12 +25,11 @@ export default class RenderCanvas extends Sequencer {
         return this;
     }
 
-    nextListener(target, result) {
+    drawListener(target, result) {
         if(result === true) {
             this.Draw(target);
         }
     }
-
     Draw(target) {
         if(this.Canvas) {
             let ctx = this.Canvas.getContext("2d");

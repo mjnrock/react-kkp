@@ -1,6 +1,6 @@
 import AState from "./AState";
 
-export default class AEvents extends AState {
+export default class AAnimus extends AState {
     constructor(events = {}, state = {}) {
         super(state);
 

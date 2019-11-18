@@ -18,6 +18,7 @@ class App extends Component {
             [ "^!#@(*$&^o", 650 ]
         ]).Start(10);
 
+        console.log(fs);
     }
 
     render() {
