@@ -28,9 +28,9 @@ export default class MediaStudio extends React.Component {
         return (
             <div className="container">
                 <div>
-                    <h3 className="text-center">Camera Toolbar</h3>
+                    <h3 className="text-center">Action Toolbar</h3>
 
-                    <Toolboxes.Camera.CameraToolbar
+                    <Toolboxes.Action.ActionToolbar
                         className="ba br2 pa3"
                         listener={ this.listener.bind(this) }
                     />
@@ -58,6 +58,15 @@ export default class MediaStudio extends React.Component {
                     <h3 className="text-center">Draw Toolbar</h3>
 
                     <Toolboxes.Draw.DrawToolbar
+                        className="ba br2 pa3"
+                        listener={ this.listener.bind(this) }
+                    />
+                </div>
+
+                <div>
+                    <h3 className="text-center">Camera Toolbar</h3>
+
+                    <Toolboxes.Camera.CameraToolbar
                         className="ba br2 pa3"
                         listener={ this.listener.bind(this) }
                     />

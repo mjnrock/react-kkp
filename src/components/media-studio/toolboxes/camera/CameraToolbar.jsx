@@ -40,15 +40,27 @@ export default class CameraToolbar extends React.Component {
         return (                
             <div className={ `${ this.props.className }` }>
                 <div>
-                    <button
-                        onClick={ this.StartVideo.bind(this) }
-                    >Start</button>
-                    <button
-                        onClick={ this.StopVideo.bind(this) }
-                    >Stop</button>
-                    <button
-                        onClick={ this.CaptureVideo.bind(this) }
-                    >Capture</button>
+                    <div className="btn-group">
+                        <button
+                            className="btn btn-outline-success"
+                            onClick={ this.StartVideo.bind(this) }
+                        >
+                            <i class="material-icons">play_arrow</i>
+                        </button>
+                        <button
+                            className="btn btn-outline-danger"
+                            onClick={ this.StopVideo.bind(this) }
+                        >
+                            <i class="material-icons">stop</i>
+                        </button>
+                        <button
+                            className="btn btn-outline-secondary"
+                            onClick={ this.CaptureVideo.bind(this) }
+                        >
+                            <i class="material-icons">stop</i>
+                        </button>
+                    </div>
+
                     <video
                         id="ms-video"
                         onClick={ this.StartVideo.bind(this) }
