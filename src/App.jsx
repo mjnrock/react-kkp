@@ -29,6 +29,7 @@ class App extends Component {
         fs.trigger("next");
         fs.trigger("next");
         fs.trigger("next");
+        fs.ToggleRepeat();
         fs.trigger("next");
         fs.trigger("next");
         fs.trigger("next");

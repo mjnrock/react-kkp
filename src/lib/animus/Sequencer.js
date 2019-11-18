@@ -7,8 +7,8 @@ export default class Sequencer extends AAnimus {
 
         this.setState({
             index: 0,
-            start: Date.now(),
-            previous: null,
+            start: null,
+            end: null,
             repeat: typeof options.repeat === "boolean" ? options.repeat : false,
             hooks: {}
         });
@@ -31,28 +31,49 @@ export default class Sequencer extends AAnimus {
 
 
         
-        this.on("init", (target, state, ...args) => {
+        this.on("start", (target, state, ...args) => {
             this.prop("index", 0);
+            this.prop("start", Date.now());
+            this.prop("end", null);
 
-            let hook = this.prop("hooks")[ "init" ];
+            let hook = this.prop("hooks")[ "start" ];
 
             if(typeof hook === "function") {
                 hook([ this, target, state ], ...args);
             }
         });
+        this.on("end", (target, state, ...args) => {
+            this.prop("end", Date.now());
+
+            let hook = this.prop("hooks")[ "end" ];
+
+            if(typeof hook === "function") {
+                hook([ this, target, state ], ...args);
+            }
+
+            if(this.prop("repeat")) {
+                this.prop("index", 0);
+
+                this.trigger("start");
+            }
+        });
         this.on("next", (target, state, ...args) => {
             let hook = this.prop("hooks")[ "next" ];
 
-            if(typeof hook === "function") {
-                let result = hook([ this, target, state ], ...args);
-
-                if(result) {
-                    this.trigger("complete");
+            if(this.prop("end") === null) {
+                if(typeof hook === "function") {
+                    let result = hook([ this, target, state ], ...args);
+    
+                    if(result) {
+                        this.trigger("complete");
+                    } else {
+                        this.trigger("persist");
+                    }
                 } else {
-                    this.trigger("persist");
+                    this.trigger("complete");
                 }
             } else {
-                this.trigger("complete");
+                console.info("[Operation Aborted]: Sequence has ended");
             }
         });
         this.on("persist", (target, state, ...args) => {
@@ -73,9 +94,7 @@ export default class Sequencer extends AAnimus {
             if(index < this.Size(true)) {
                 index += 1;
             } else {
-                if(this.prop("repeat")) {
-                    index = 0;
-                }
+                this.trigger("end");
             }
 
             this.prop("index", index);
@@ -128,17 +147,27 @@ export default class Sequencer extends AAnimus {
         return this;
     }
 
-    // Start() {
-    //     this.meta.start = Date.now();
-    //     this.meta.isPlaying = true;
+    SetRepeat(bool = false) {
+        this.prop("repeat", !!bool);
 
-    //     return this;
-    // }
-    // Stop() {
-    //     this.meta.isPlaying = false;
+        return this;
+    }
+    ToggleRepeat() {
+        this.prop("repeat", !!!this.prop("repeat"));
 
-    //     return this;
-    // }
+        return this;
+    }
+
+    Start() {
+        this.trigger("start");
+
+        return this;
+    }
+    End() {
+        this.trigger("end");
+
+        return this;
+    }
     // Reset() {
     //     this.Stop();
 

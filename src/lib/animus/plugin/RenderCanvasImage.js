@@ -18,7 +18,7 @@ export default class RenderCanvasImage extends Sequencer {
         for(let i in nodes) {
             let node = nodes[ i ];
 
-            if(/[\/.](gif|jpg|jpeg|tiff|png)$/i.test(node)) {
+            if(/[/.](gif|jpg|jpeg|tiff|png)$/i.test(node)) {
                 this.Nodes.push(new ImageNode(node, () => true));
             } else if(node instanceof ImageNode) {
                 this.Nodes.push(node);
