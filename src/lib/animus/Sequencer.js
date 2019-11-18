@@ -56,6 +56,9 @@ export default class Sequencer extends AEvents {
         }
     }
 
+    GetActiveNode() {
+        return this.Nodes[ this._prop("index") ];
+    }
     GetNode(index = 0) {
         return this.Nodes[ index ];
     }
