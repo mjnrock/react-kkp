@@ -9,14 +9,6 @@ import "./MediaStudio.css";
 @inject("store")
 @observer
 export default class MediaStudio extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            videoStream: null
-        };
-    }
-
     componentDidMount() {
         this.props.store.MediaStudioStore.mainCanvas = new Fabric.Canvas(
             document.getElementById("ms-canvas"),
@@ -33,30 +25,25 @@ export default class MediaStudio extends React.Component {
     }
 
     StartVideo(e) {
-        if(!this.state.videoStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        if(!this.props.store.MediaStudioStore.videoStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             let _this = this;
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function(stream) {
-                    //video.src = window.URL.createObjectURL(stream);
                     let video = document.getElementById("ms-video");
                     video.srcObject = stream;
                     video.play();
                     
-                    _this.setState({
-                        videoStream: stream
-                    });
+                    _this.props.store.MediaStudioStore.videoStream = stream;
                 });
         }
     }
     StopVideo(e) {
-        if(this.state.videoStream) {
-            this.state.videoStream.getTracks().forEach(function(track) {
+        if(this.props.store.MediaStudioStore.videoStream) {
+            this.props.store.MediaStudioStore.videoStream.getTracks().forEach(function(track) {
                 track.stop();
             });
 
-            this.setState({
-                videoStream: null
-            });
+            this.props.store.MediaStudioStore.videoStream = null;
         }
     }
     CaptureVideo(e) {

@@ -2,6 +2,7 @@ import { action, observable } from "mobx";
 
 class MediaStudioStore {
     @observable mainCanvas;
+    @observable videoStream;
     @observable command;
     @observable isDirty = false;
 
