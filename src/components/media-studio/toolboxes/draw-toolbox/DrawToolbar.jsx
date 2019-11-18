@@ -1,15 +1,11 @@
 import React from "react";
-import "./DrawToolbar.css";
+import ColorToolbar from "./../color-toolbox/ColorToolbar";
+
+import DrawSize from "./DrawSize";
 
 export default class DrawToolbar extends React.Component {
     listener(e, eventType, command = null) {
-        let prefix = this.props.commandPrefix ? `${ this.props.commandPrefix }.` : "";
-
-        if(command) {
-            this.props.listener(e, eventType, `${ prefix }${ command }`);
-        } else {
-            this.props.listener(e, eventType, `${ prefix }${ e.target.getAttribute("command") }:${ e.target.value }`);
-        }
+        this.props.listener(e, eventType, `draw.${ command }`);
     }
 
     render() {
@@ -18,7 +14,16 @@ export default class DrawToolbar extends React.Component {
                 <div className="row">
                     <div className="col">
                         <div className="row">
-                            
+                            <ColorToolbar
+                                listener={ this.listener.bind(this) }
+                            />
+                        </div>
+
+                        <div className="row mt2">
+                            <DrawSize
+                                listener={ this.listener.bind(this) }
+                                className={ `col` }
+                            />
                         </div>
                     </div>
                 </div>
