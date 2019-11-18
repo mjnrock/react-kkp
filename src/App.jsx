@@ -9,7 +9,7 @@ import Animus from "./lib/animus/package";
 @observer
 class App extends Component {
     componentDidMount() {
-        let fs = new Animus.RenderCanvas(document.getElementById("animus-canvas"), [
+        let fs = new Animus.RenderCanvasText(document.getElementById("animus-canvas"), [
             [ "text", 1000 ],
             [ "hello", 300 ],
             [ "yo", 700 ],
@@ -18,6 +18,8 @@ class App extends Component {
         ]).Start(10);
 
         console.log(fs);
+
+        // fs.listen("next", () => console.log("NEXT"));
     }
 
     render() {

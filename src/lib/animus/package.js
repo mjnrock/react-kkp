@@ -3,7 +3,7 @@ import AAnimus from "./AAnimus";
 import Node from "./Node";
 import Sequencer from "./Sequencer";
 
-import RenderCanvas from "./RenderCanvas";
+import RenderCanvasText from "./RenderCanvasText";
 
 export default {
     AState,
@@ -11,5 +11,5 @@ export default {
     Node,
     Sequencer,
 
-    RenderCanvas
+    RenderCanvasText
 };

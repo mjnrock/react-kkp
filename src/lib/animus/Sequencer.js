@@ -2,18 +2,18 @@ import AAnimus from "./AAnimus";
 import Node from "./Node";
 
 export default class Sequencer extends AAnimus {
-    constructor(frames = []) {
+    constructor(nodes = []) {
         super();
 
-        this._setState({
+        this.setState({
             index: 0,
             start: Date.now(),
             previous: null
         });
         
-        this._on("next", (name, scope, state, ...args) => {
-            let frame = scope.GetNode(state.index),
-                next = frame.getNext();
+        this.on("next", (name, scope, state, ...args) => {
+            let node = scope.GetNode(state.index),
+                next = node.getNext();
                 
             let index = state.index;
 
@@ -25,15 +25,15 @@ export default class Sequencer extends AAnimus {
     
             if(typeof next === "number") {
                 if(Date.now() >= state.previous + next) {
-                    scope._prop("index", index);
-                    scope._prop("previous", Date.now());
+                    scope.prop("index", index);
+                    scope.prop("previous", Date.now());
 
                     return true;
                 }
             } else if(typeof next === "function") {
-                if(next(frame, frame._getState().data, scope, ...args) === true) {
-                    scope._prop("index", index);
-                    scope._prop("previous", Date.now());
+                if(next(node, node.getState().data, scope, ...args) === true) {
+                    scope.prop("index", index);
+                    scope.prop("previous", Date.now());
 
                     return true;
                 }
@@ -43,13 +43,13 @@ export default class Sequencer extends AAnimus {
         });
 
         this.Nodes = [];
-        for(let i in frames) {
-            let frame = frames[ i ];
+        for(let i in nodes) {
+            let node = nodes[ i ];
 
-            if(frame instanceof Node) {
-                this.Nodes.push(frame);
-            } else if(Array.isArray(frame)) {
-                let [ data, next, state ] = frame;
+            if(node instanceof Node) {
+                this.Nodes.push(node);
+            } else if(Array.isArray(node)) {
+                let [ data, next, state ] = node;
 
                 this.Nodes.push(new Node(data, next, state));
             }
@@ -57,18 +57,18 @@ export default class Sequencer extends AAnimus {
     }
 
     GetActiveNode() {
-        return this.Nodes[ this._prop("index") ];
+        return this.Nodes[ this.prop("index") ];
     }
     GetNode(index = 0) {
         return this.Nodes[ index ];
     }
-    SetNode(index, frame) {
-        this.Nodes[ index ] = frame;
+    SetNode(index, node) {
+        this.Nodes[ index ] = node;
 
         return this;
     }
-    AddNode(frame) {
-        this.Nodes.push(frame);
+    AddNode(node) {
+        this.Nodes.push(node);
 
         return this;
     }

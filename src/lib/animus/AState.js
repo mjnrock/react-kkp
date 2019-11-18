@@ -1,25 +1,25 @@
 export default class AState {
     constructor(state = {}) {
-        this._state = state;
+        this.state = state;
     }
 
-    _getState() {
-        return this._state;
+    getState() {
+        return this.state;
     }
-    _setState(state = {}) {
-        this._state = state;
+    setState(state = {}) {
+        this.state = state;
 
         return this;
     }
 
-    _hasProp(key) {
-        return this._state[ key ] !== void 0;
+    hasProp(key) {
+        return this.state[ key ] !== void 0;
     }
-    _prop(key, value) {
+    prop(key, value) {
         if(value === void 0) {
-            return this._state[ key ];
+            return this.state[ key ];
         } else {
-            this._state[ key ] = value;
+            this.state[ key ] = value;
         }
 
         return this;

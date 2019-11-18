@@ -4,30 +4,30 @@ export default class AAnimus extends AState {
     constructor(events = {}, state = {}) {
         super(state);
 
-        this._events = events;
-        this._listeners = {};
+        this.events = events;
+        this.listeners = {};
 
-        if("init" in this._events) {
-            this._trigger("init");
+        if("init" in this.events) {
+            this.trigger("init");
         }
     }
 
-    _listen(name, listener) {
-        if(!Array.isArray(this._listeners[ name ])) {
-            this._listeners[ name ] = [];
+    listen(name, listener) {
+        if(!Array.isArray(this.listeners[ name ])) {
+            this.listeners[ name ] = [];
         }
 
-        this._listeners[ name ].push(listener);
+        this.listeners[ name ].push(listener);
 
         return this;
     }
-    _unlisten(name, listener) {
-        if(Array.isArray(this._listeners[ name ])) {
-            for(let i in this._listeners[ name ]) {
-                let list = this._listeners[ name ][ i ];
+    unlisten(name, listener) {
+        if(Array.isArray(this.listeners[ name ])) {
+            for(let i in this.listeners[ name ]) {
+                let list = this.listeners[ name ][ i ];
 
                 if(list.toString() === listener.toString()) {
-                    this._listeners[ name ].splice(i, 1);
+                    this.listeners[ name ].splice(i, 1);
                 }
             }
         }
@@ -35,28 +35,28 @@ export default class AAnimus extends AState {
         return this;
     }
 
-    _on(name, handler) {
-        this._events[ name ] = handler;
+    on(name, handler) {
+        this.events[ name ] = handler;
 
         return this;
     }
-    _off(name) {
-        delete this._events[ name ];
+    off(name) {
+        delete this.events[ name ];
 
         return this;
     }
 
-    _has(name) {
-        return !!this._events[ name ];
+    has(name) {
+        return !!this.events[ name ];
     }
-    _trigger(name, ...args) {
-        let fn = this._events[ name ];
+    trigger(name, ...args) {
+        let fn = this.events[ name ];
 
         if(typeof fn === "function") {
-            let result = fn(name, this, this._getState(), ...args);
+            let result = fn(name, this, this.getState(), ...args);
 
-            for(let i in this._listeners[ name ]) {
-                let listener = this._listeners[ name ][ i ];
+            for(let i in this.listeners[ name ]) {
+                let listener = this.listeners[ name ][ i ];
 
                 if(typeof listener === "function") {
                     listener(this, result);

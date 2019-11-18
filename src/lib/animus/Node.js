@@ -2,7 +2,7 @@ import AState from "./AState";
 
 //@data <any>: Content data of the <Node>
 //@next <int|fn>: How to determine if <Node> should progress (duration or by fn() === true)
-//@state? <obj>: Any other data to put in frame
+//@state? <obj>: Any other data to put in node
 export default class Node extends AState {
     constructor(data, next, state = {}) {
         super({
@@ -13,24 +13,24 @@ export default class Node extends AState {
     }
 
     getNext() {
-        return this._getState().next;
+        return this.getState().next;
     }
 
     getDatum(key) {
-        return this._getState().data[ key ];
+        return this.getState().data[ key ];
     }
     setDatum(key, value) {
-        let data = this._getState().data;
+        let data = this.getState().data;
 
         data[ key ] = value;
 
-        this._prop("data", data);
+        this.prop("data", data);
 
         return this;
     }
     
     setData(data) {
-        this._prop("data", data);
+        this.prop("data", data);
 
         return this;
     }

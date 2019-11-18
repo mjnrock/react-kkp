@@ -1,21 +1,21 @@
 import Sequencer from "./Sequencer";
 
-export default class RenderCanvas extends Sequencer {
-    constructor(htmlCanvas, frames = [], fps = 5) {
-        super(frames);
+export default class RenderCanvasText extends Sequencer {
+    constructor(htmlCanvas, nodes = [], fps = 5) {
+        super(nodes);
 
         this.Canvas = htmlCanvas;
         this.Loop = null;
 
-        this._prop("fps", fps);
-        this._listen("next", this.drawListener.bind(this));
+        this.prop("fps", fps);
+        this.listen("next", this.drawListener.bind(this));
     }
 
     Start(fps = 5) {
-        this._prop("index", 0);
-        this._prop("fps", fps);
+        this.prop("index", 0);
+        this.prop("fps", fps);
         this.Loop = setInterval(() => {
-            this._trigger("next");
+            this.trigger("next");
         }, 1000 / fps);
 
         return this;
@@ -38,7 +38,7 @@ export default class RenderCanvas extends Sequencer {
 
             ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
             ctx.fillText(
-                target.GetActiveNode()._prop("data"),
+                target.GetActiveNode().prop("data"),
                 Math.random() * 500,
                 Math.random() * 500
             );
