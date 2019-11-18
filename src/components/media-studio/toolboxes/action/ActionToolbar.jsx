@@ -74,41 +74,4 @@ export default class ActionToolbar extends React.Component {
             </div>
         );
     }
-
-    // render() {
-    //     //TODO  Send these to the MediaStudioStore.setCommand() on button clicks, bind/use <Button ... />
-    //     return (
-    //         <div className="row">
-    //             <div className="col">
-    //                 <div className={ `btn-group ${ this.props.className }` }>
-    //                     <button className="btn btn-outline-secondary">
-    //                         <input id="background-color" type="color" hidden />
-    //                         <i className="material-icons">color_lens</i>
-    //                     </button>
-    //                     <button className="btn btn-outline-secondary">
-    //                         <i className="material-icons">text_fields</i>
-    //                     </button>
-    //                     <button className="btn btn-outline-secondary">
-    //                         😀
-    //                     </button>                        
-    //                     <div
-    //                         className="fileUpload btn btn-outline-secondary"
-    //                     >
-    //                         <span>
-    //                             <i className="material-icons">image</i>
-    //                         </span>
-    //                         <input
-    //                             type="file"
-    //                             id="imageLoader"
-    //                             className="upload"
-    //                         />
-    //                     </div>
-    //                     <button className="btn btn-outline-secondary">
-    //                         <i className="material-icons">brush</i>
-    //                     </button>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     );
-    // }
 };
