@@ -53,7 +53,7 @@ export default class AAnimus extends AState {
         let fn = this.events[ name ];
 
         if(typeof fn === "function") {
-            let result = fn(name, this, this.getState(), ...args);
+            let result = fn(this, this.getState(), ...args);
 
             for(let i in this.listeners[ name ]) {
                 let listener = this.listeners[ name ][ i ];

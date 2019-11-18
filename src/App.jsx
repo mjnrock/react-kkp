@@ -2,18 +2,37 @@ import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 
 import MediaStudio from "./components/media-studio/package";
-// import Animus from "./lib/animus/package";
+import Animus from "./lib/animus/package";
 
 @inject("store")
 @observer
 class App extends Component {
     componentDidMount() {
-        // let fs = new Animus.Plugin.RenderCanvasText(document.getElementById("animus-canvas"), [
-        //     [ "cats", 500 ],
-        //     [ "dogs", 600 ],
-        //     [ "fish", 850 ],
-        //     [ "&^%$2", 300 ],
-        // ]).Start(2);
+        let fs = new Animus.EventSequencer([
+            [ "cats", 500 ],
+            [ "dogs", 600 ],
+            [ "fish", 850 ],
+            [ "&^%$2", 300 ],
+        ], {
+            repeat: true
+        }).SetHooks({
+            next: ([ sequencer, target, state ], ...args) => {
+                console.log(state);
+
+                return true;
+            },
+            persist: () => console.log("PERSISTED"),
+            complete: () => console.log("COMPLETED")
+        });
+        
+        console.log(fs);
+        fs.trigger("next");
+        fs.trigger("next");
+        fs.trigger("next");
+        fs.trigger("next");
+        fs.trigger("next");
+        fs.trigger("next");
+
         // let fs2 = new Animus.Plugin.RenderCanvasImage(document.getElementById("animus-canvas"), [
         //     // "raccoon.png",
         //     [ "Pusheen.png", 300 ],
