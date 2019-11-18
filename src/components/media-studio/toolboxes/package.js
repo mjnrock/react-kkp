@@ -1,9 +1,11 @@
-import ColorToolbox from "./color-toolbox/package";
-import DrawToolbox from "./draw-toolbox/package";
-import TextToolbox from "./text-toolbox/package";
+import Color from "./color/package";
+import Draw from "./draw/package";
+import Text from "./text/package";
+import Camera from "./camera/package";
 
 export default {
-    ColorToolbox,
-    DrawToolbox,
-    TextToolbox,
+    Color,
+    Draw,
+    Text,
+    Camera
 };

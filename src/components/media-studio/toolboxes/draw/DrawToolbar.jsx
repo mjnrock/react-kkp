@@ -1,5 +1,5 @@
 import React from "react";
-import ColorToolbar from "./../color-toolbox/ColorToolbar";
+import ColorToolbar from "../color/ColorToolbar";
 
 import DrawSize from "./DrawSize";
 

@@ -24,88 +24,42 @@ export default class MediaStudio extends React.Component {
         console.log(this.props.store.MediaStudioStore.getCommand());
     }
 
-    StartVideo(e) {
-        if(!this.props.store.MediaStudioStore.videoStream && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            let _this = this;
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    let video = document.getElementById("ms-video");
-                    video.srcObject = stream;
-                    video.play();
-                    
-                    _this.props.store.MediaStudioStore.videoStream = stream;
-                });
-        }
-    }
-    StopVideo(e) {
-        if(this.props.store.MediaStudioStore.videoStream) {
-            this.props.store.MediaStudioStore.videoStream.getTracks().forEach(function(track) {
-                track.stop();
-            });
-
-            this.props.store.MediaStudioStore.videoStream = null;
-        }
-    }
-    CaptureVideo(e) {
-        let canvas = this.props.store.MediaStudioStore.mainCanvas,
-            ctx = canvas.getContext("2d");
-
-        ctx.drawImage(document.getElementById("ms-video"), 0, 0, canvas.width, canvas.height);
-    }
-
     render() {
-        // let MS = this.props.store.MediaStudioStore;
-
         return (
             <div className="container">
                 <div>
-                    <button
-                        onClick={ this.StartVideo.bind(this) }
-                    >Start</button>
-                    <button
-                        onClick={ this.StopVideo.bind(this) }
-                    >Stop</button>
-                    <button
-                        onClick={ this.CaptureVideo.bind(this) }
-                    >Capture</button>
-                    <video
-                        id="ms-video"
-                        onClick={ this.StartVideo.bind(this) }
-                        width={ 500 }
-                        height={ 500 }
-                    ></video>
+                    <h3 className="text-center">Camera Toolbar</h3>
+
+                    <Toolboxes.Camera.CameraToolbar
+                        className="ba br2 pa3"
+                        listener={ this.listener.bind(this) }
+                    />
                 </div>
-                <div>
-                    <canvas
-                        id="ms-canvas"
-                        width={ 500 }
-                        height={ 500 }
-                    ></canvas>
-                </div>
+
                 <div>
                     <h3 className="text-center">Color Toolbar</h3>
 
-                    <Toolboxes.ColorToolbox.ColorToolbar
+                    <Toolboxes.Color.ColorToolbar
                         className="ba br2 pa3"
-                        listener={this.listener.bind(this)}
+                        listener={ this.listener.bind(this) }
                     />
                 </div>
 
                 <div>
                     <h3 className="text-center">Text Toolbar</h3>
 
-                    <Toolboxes.TextToolbox.TextToolbar
+                    <Toolboxes.Text.TextToolbar
                         className="ba br2 pa3"
-                        listener={this.listener.bind(this)}
+                        listener={ this.listener.bind(this) }
                     />
                 </div>
 
                 <div>
                     <h3 className="text-center">Draw Toolbar</h3>
 
-                    <Toolboxes.DrawToolbox.DrawToolbar
+                    <Toolboxes.Draw.DrawToolbar
                         className="ba br2 pa3"
-                        listener={this.listener.bind(this)}
+                        listener={ this.listener.bind(this) }
                     />
                 </div>
             </div>
