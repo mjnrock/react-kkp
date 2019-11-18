@@ -12,6 +12,7 @@ export default class RenderCanvas extends Sequencer {
     }
 
     Start(fps = 5) {
+        this._prop("index", 0);
         this._prop("fps", fps);
         this.Loop = setInterval(() => {
             this._trigger("next");

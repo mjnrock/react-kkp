@@ -10,7 +10,6 @@ import Animus from "./lib/animus/package";
 class App extends Component {
     componentDidMount() {
         let fs = new Animus.RenderCanvas(document.getElementById("animus-canvas"), [
-            //? Example transformation and contingent progression into _state.next
             [ "text", 1000 ],
             [ "hello", 300 ],
             [ "yo", 700 ],
