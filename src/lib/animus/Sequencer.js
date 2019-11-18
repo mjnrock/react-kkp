@@ -44,6 +44,10 @@ export default class Sequencer extends AAnimus {
             return false;
         });
 
+        this.setNodes(nodes);
+    }
+
+    setNodes(nodes = []) {
         this.Nodes = [];
         for(let i in nodes) {
             let node = nodes[ i ];
@@ -56,6 +60,8 @@ export default class Sequencer extends AAnimus {
                 this.Nodes.push(new Node(data, next, state));
             }
         }
+
+        return this;
     }
 
     GetActiveNode() {

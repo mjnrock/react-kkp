@@ -1,4 +1,5 @@
-import Sequencer from "../Sequencer";
+import Sequencer from "./../Sequencer";
+import ImageNode from "./ImageNode";
 
 export default class RenderCanvasImage extends Sequencer {
     constructor(htmlCanvas, nodes = [], fps = 5) {
@@ -9,6 +10,26 @@ export default class RenderCanvasImage extends Sequencer {
 
         this.prop("fps", fps);
         this.listen("next", this.drawListener.bind(this));
+    }
+
+    setNodes(nodes = []) {
+        this.Nodes = [];
+
+        for(let i in nodes) {
+            let node = nodes[ i ];
+
+            if(/[\/.](gif|jpg|jpeg|tiff|png)$/i.test(node)) {
+                this.Nodes.push(new ImageNode(node, () => true));
+            } else if(node instanceof ImageNode) {
+                this.Nodes.push(node);
+            } else if(Array.isArray(node)) {
+                let [ uri, next, state ] = node;
+
+                this.Nodes.push(new ImageNode(uri, next, state));
+            }
+        }
+
+        return this;
     }
 
     Start(fps = 5) {
@@ -34,11 +55,8 @@ export default class RenderCanvasImage extends Sequencer {
     Draw(target) {
         if(this.Canvas) {
             let ctx = this.Canvas.getContext("2d");
-            
-            // console.log(target.GetActiveNode());
 
             ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
-            // console.log(target.GetActiveNode().getDatum("image"))
             ctx.drawImage(
                 target.GetActiveNode().getDatum("image"),
                 0,

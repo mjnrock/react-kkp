@@ -9,12 +9,20 @@ import Animus from "./lib/animus/package";
 @observer
 class App extends Component {
     componentDidMount() {
-        let fs = new Animus.Plugin.RenderCanvasImage(document.getElementById("animus-canvas"), [
-            new Animus.Plugin.ImageNode("raccoon.png"),
-            new Animus.Plugin.ImageNode("Pusheen.png")
-        ]).Start(10);
+        // let fs = new Animus.Plugin.RenderCanvasText(document.getElementById("animus-canvas"), [
+        //     [ "cats", 500 ],
+        //     [ "dogs", 600 ],
+        //     [ "fish", 850 ],
+        //     [ "&^%$2", 300 ],
+        // ]).Start(2);
+        // let fs2 = new Animus.Plugin.RenderCanvasImage(document.getElementById("animus-canvas"), [
+        //     // "raccoon.png",
+        //     [ "Pusheen.png", 300 ],
+        //     new Animus.Plugin.ImageNode("raccoon.png", 1000),
+        //     // new Animus.Plugin.ImageNode("Pusheen.png")
+        // ]).Start(2);
 
-        console.log(fs);
+        // console.log(fs);
 
         // fs.listen("next", () => console.log("NEXT"));
     }
@@ -26,7 +34,7 @@ class App extends Component {
             <div>
                 <div>{ MediaStudioStore.title }</div>
                 <hr />
-                <canvas id="animus-canvas" width={ 500 } height={ 500 } className="ba br1"></canvas>
+                {/* <canvas id="animus-canvas" width={ 500 } height={ 500 } className="ba br1"></canvas> */}
                 <MediaStudio.MediaStudio />
             </div>
         );

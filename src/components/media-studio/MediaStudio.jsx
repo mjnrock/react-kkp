@@ -15,9 +15,27 @@ export default class MediaStudio extends React.Component {
         return (
             <div className="container">
                 <div>
+                    <h3 className="text-center">Color Toolbar</h3>
+                    
+                    <Toolboxes.ColorToolbox.ColorToolbar
+                        className="ba br2 pa3"
+                        listener={ this.listener.bind(this) }
+                    />
+                </div>
+                
+                <div>
                     <h3 className="text-center">Text Toolbar</h3>
                     
                     <Toolboxes.TextToolbox.TextToolbar
+                        className="ba br2 pa3"
+                        listener={ this.listener.bind(this) }
+                    />
+                </div>
+                
+                <div>
+                    <h3 className="text-center">Draw Toolbar</h3>
+                    
+                    <Toolboxes.DrawToolbox.DrawToolbar
                         className="ba br2 pa3"
                         listener={ this.listener.bind(this) }
                     />

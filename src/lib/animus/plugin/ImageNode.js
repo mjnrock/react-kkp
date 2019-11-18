@@ -10,7 +10,10 @@ export default class ImageNode extends Node {
                 image: _img,
                 uri: uri
             });
-            this.prop("next", () => true);
+
+            if(this.prop("next") === void 0 || this.prop("next") === null) {
+                this.prop("next", () => true);
+            }
         }.bind(this);
         _img.src = uri;
     }
