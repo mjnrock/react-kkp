@@ -26,7 +26,7 @@ export default class AEvents extends AState {
             for(let i in this._subscribers[ name ]) {
                 let list = this._subscribers[ name ][ i ];
 
-                if(list === listener) {
+                if(list.toString() === listener.toString()) {
                     this._subscribers[ name ].splice(i, 1);
                 }
             }
