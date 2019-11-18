@@ -19,10 +19,6 @@ export default class DrawSize extends React.Component {
         });
     }
 
-    listener(e, eventType, command) {
-        this.props.listener(e, e.type, `size:${ e.target.value }`);
-    }
-
     render() {
         return (
             <div className={ `${ this.props.className }`}>
