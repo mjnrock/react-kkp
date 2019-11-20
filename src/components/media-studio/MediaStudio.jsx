@@ -3,12 +3,14 @@ import { inject, observer } from "mobx-react";
 import { fabric as Fabric } from "fabric";
 
 import Toolboxes from "./toolboxes/package";
+import FabricHelper from "./FabricHelper";
 
 import "./MediaStudio.css";
 
 @inject("store")
 @observer
 export default class MediaStudio extends React.Component {
+    
     componentDidMount() {
         this.props.store.MediaStudioStore.mainCanvas = new Fabric.Canvas(
             document.getElementById("ms-canvas"),
@@ -21,7 +23,10 @@ export default class MediaStudio extends React.Component {
     listener(e, eventType, command) {
         this.props.store.MediaStudioStore.setCommand(`ms.${command}`);
 
-        console.log(this.props.store.MediaStudioStore.getCommand());
+        FabricHelper.ProcessCommand(
+            this.props.store.MediaStudioStore.mainCanvas,
+            this.props.store.MediaStudioStore.getCommand()
+        );
     }
 
     render() {

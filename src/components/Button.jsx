@@ -1,9 +1,6 @@
 import React from "react";
-import { inject, observer } from "mobx-react";
 
-@inject("store")
-@observer
-export default class Toolbar extends React.Component {
+export default class Button extends React.Component {
     handler(e) {
         let command = this.props.command !== void 0 ? this.props.command : null;
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { inject } from "mobx-react";
 
+//! As of now, this only works as expected on Desktop
 @inject("store")
 export default class CameraToolbar extends React.Component {
     StartVideo(e) {
@@ -10,6 +11,10 @@ export default class CameraToolbar extends React.Component {
                 .then(function(stream) {
                     let video = document.getElementById("ms-video");
                     video.srcObject = stream;
+
+                    //! A permission error fired on mobile safari, apparently solved with this library
+                    //? https://stackoverflow.com/questions/23388135/how-to-play-html5-video-play-m3u8-on-mobile-and-desktop
+                    //? https://github.com/video-dev/hls.js/
                     video.play();
                     
                     _this.props.store.MediaStudioStore.videoStream = stream;
