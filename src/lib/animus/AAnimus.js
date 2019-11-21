@@ -35,6 +35,24 @@ export default class AAnimus extends AState {
         return this;
     }
 
+    safeOn(name, handler) {
+        if(typeof handler === "function") {
+            this.events[ name ] = handler;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    load(events = {}) {
+        for(let name in events) {
+            this.events[ name ] = events[ name ];
+        }
+
+        return this;
+    }
+
     on(name, handler) {
         this.events[ name ] = handler;
 
@@ -46,6 +64,9 @@ export default class AAnimus extends AState {
         return this;
     }
 
+    get(name) {
+        return this.events[ name ];
+    }
     has(name) {
         return !!this.events[ name ];
     }

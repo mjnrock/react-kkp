@@ -8,31 +8,59 @@ import Animus from "./lib/animus/package";
 @observer
 class App extends Component {
     componentDidMount() {
-        let fs = new Animus.EventSequencer([
-            [ "cats", 500 ],
-            [ "dogs", 600 ],
-            [ "fish", 850 ],
-            [ "&^%$2", 300 ],
-        ], {
-            repeat: true
-        }).SetHooks({
-            next: ([ sequencer, target, state ], ...args) => {
-                console.log(state);
+        let sequence = new Animus.Sequence();
+        let node = new Animus.TimeNode("cats", 1000);
 
-                return true;
-            },
-            persist: () => console.log("PERSISTED"),
-            complete: () => console.log("COMPLETED")
-        });
+        sequence.AddNode(node);
+
+        node.Run();
+        sequence.RemoveNode(0);
+
+        setTimeout(() => {
+            console.log(node.Query());
+        }, 2000);
+
+
+
+        // let fs = new Animus.IntervalSequencer([
+        //         // new Animus.Node("cat", () => {
+        //         //     return true;
+        //         // }),
+        //         [ "cat", 600 ],
+        //         [ "dogs", 600 ],
+        //         [ "fish", 850 ],
+        //         [ "&^%$2", 300 ],
+        //     ], 500, { repeat: true });
+
+        // fs.Start();
+
+
+        // let fs = new Animus.Sequencer([
+        //     [ "cats", 500 ],
+        //     [ "dogs", 600 ],
+        //     [ "fish", 850 ],
+        //     [ "&^%$2", 300 ],
+        // ], {
+        //     repeat: true
+        // });
+        // .SetHooks({
+        //     next: ([ sequencer, target, state ], ...args) => {
+        //         console.log(state);
+
+        //         return true;
+        //     },
+        //     persist: () => console.log("PERSISTED"),
+        //     complete: () => console.log("COMPLETED")
+        // });
         
-        console.log(fs);
-        fs.trigger("next");
-        fs.trigger("next");
-        fs.trigger("next");
-        fs.ToggleRepeat();
-        fs.trigger("next");
-        fs.trigger("next");
-        fs.trigger("next");
+        // console.log(fs);
+        // fs.trigger("sequence:next");
+        // fs.trigger("sequence:next");
+        // fs.trigger("sequence:next");
+        // fs.ToggleRepeat();
+        // fs.trigger("sequence:next");
+        // fs.trigger("sequence:next");
+        // fs.trigger("sequence:next");
 
         // let fs2 = new Animus.Plugin.RenderCanvasImage(document.getElementById("animus-canvas"), [
         //     // "raccoon.png",

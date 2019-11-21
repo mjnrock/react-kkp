@@ -1,4 +1,4 @@
-import Sequencer from "../Sequencer";
+import Sequencer from "../Sequence";
 
 export default class RenderCanvasText extends Sequencer {
     constructor(htmlCanvas, nodes = [], fps = 5) {

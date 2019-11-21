@@ -1,5 +1,5 @@
-import AAnimus from "./AAnimus";
-import Node from "./Node";
+import AAnimus from "../AAnimus";
+import Node from "../Node";
 
 export default class Sequencer extends AAnimus {
     constructor(nodes = [], options = {}) {
@@ -16,73 +16,83 @@ export default class Sequencer extends AAnimus {
         this.Nodes = [];
         this.setNodes(nodes);
         
-        this.on("start", (target, state, ...args) => {
+        this.on("sequence:start", (...args) => {
             this.prop("index", 0);
             this.prop("start", Date.now());
             this.prop("end", null);
 
-            let hook = this.prop("hooks")[ "start" ];
+            let hook = this.prop("hooks")[ "sequence:start" ];
 
             if(typeof hook === "function") {
-                hook([ this, target, state ], ...args);
+                hook(this, ...args);
             }
         });
-        this.on("end", (target, state, ...args) => {
+        this.on("sequence:next", (...args) => {
+            let index = this.prop("index"),
+                hook = this.prop("hooks")[ "sequence:next" ];
+
+            if(typeof hook === "function") {
+                hook(this, ...args);
+            }
+
+            console.log(this.prop("repeat"));
+
+            if(index < this.Size(true)) {
+                index += 1;
+            } else {
+                if(this.prop("repeat") === true) {
+                    this.trigger("sequence:start");
+                } else {
+                    this.trigger("sequence:end");
+                }
+            }
+            
+
+            this.prop("index", index);
+        });
+        this.on("sequence:end", (...args) => {
             this.prop("end", Date.now());
 
-            let hook = this.prop("hooks")[ "end" ];
+            let hook = this.prop("hooks")[ "sequence:end" ];
 
             if(typeof hook === "function") {
-                hook([ this, target, state ], ...args);
-            }
-
-            if(this.prop("repeat")) {
-                this.prop("index", 0);
-
-                this.trigger("start");
+                hook(this, ...args);
             }
         });
-        this.on("next", (target, state, ...args) => {
-            let hook = this.prop("hooks")[ "next" ];
+
+
+        this.on("node:run", (...args) => {
+            let hook = this.prop("hooks")[ "node:run" ];
 
             if(this.prop("end") === null) {
                 if(typeof hook === "function") {
-                    let result = hook([ this, target, state ], ...args);
+                    let result = hook(this, ...args);
     
-                    if(result) {
-                        this.trigger("complete");
+                    if(result === false) {
+                        this.trigger("node:persist");
                     } else {
-                        this.trigger("persist");
+                        this.trigger("node:complete");
                     }
                 } else {
-                    this.trigger("complete");
+                    this.trigger("node:complete");
                 }
             } else {
                 console.info("[Operation Aborted]: Sequence has ended");
             }
         });
-        this.on("persist", (target, state, ...args) => {
-            let hook = this.prop("hooks")[ "persist" ];
+        this.on("node:persist", (...args) => {
+            let hook = this.prop("hooks")[ "node:persist" ];
 
             if(typeof hook === "function") {
-                hook([ this, target, state ], ...args);
+                hook(this, ...args);
             }
         });
-        this.on("complete", (target, state, ...args) => {
-            let index = this.prop("index"),
-                hook = this.prop("hooks")[ "complete" ];
+        this.on("node:complete", (...args) => {
+            let hook = this.prop("hooks")[ "node:complete" ];
 
             if(typeof hook === "function") {
-                hook([ this, target, state ], ...args);
+                hook(this, ...args);
             }
-
-            if(index < this.Size(true)) {
-                index += 1;
-            } else {
-                this.trigger("end");
-            }
-
-            this.prop("index", index);
         });
     }
 
@@ -123,10 +133,10 @@ export default class Sequencer extends AAnimus {
     GetHook(key) {
         return this.prop("hooks")[ key ];
     }
-    SetHook(key, value) {
+    SetHook(key, fn) {
         let hooks = this.prop("hooks");
 
-        hooks[ key ] = value;
+        hooks[ key ] = fn;
         this.SetHooks(hooks);
 
         return this;
@@ -170,11 +180,4 @@ export default class Sequencer extends AAnimus {
 
         return this;
     }
-    // Reset() {
-    //     this.Stop();
-
-    //     this.meta.index = 0;
-
-    //     return this;
-    // }
 }

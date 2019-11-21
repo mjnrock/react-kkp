@@ -1,5 +1,5 @@
-import AAnimus from "./AAnimus";
-import Node from "./Node";
+import AAnimus from "../AAnimus";
+import Node from "../Node";
 
 export default class Sequencer extends AAnimus {
     constructor(nodes = []) {

@@ -1,4 +1,4 @@
-import Sequencer from "./../Sequencer";
+import Sequencer from "../Sequence";
 import ImageNode from "./ImageNode";
 
 export default class RenderCanvasImage extends Sequencer {

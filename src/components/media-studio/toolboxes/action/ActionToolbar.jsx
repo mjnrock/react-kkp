@@ -39,7 +39,7 @@ export default class ActionToolbar extends React.Component {
                     <Button
                         listener={ this.listener.bind(this) }
                         command={ `text` }
-                        className={ `btn-outline-secondary pa3 pb2 btn-outline-success` }
+                        className={ `btn-outline-secondary pa3 pb2 btn-outline-warning` }
                     >
                         <i className="material-icons">text_fields</i>
                     </Button>
