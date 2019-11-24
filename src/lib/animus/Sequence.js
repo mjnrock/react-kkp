@@ -12,18 +12,19 @@ export default class Sequence extends AAnimus {
         this.prop("repeat", typeof options.repeat === "boolean" ? options.repeat : false);
 
         this.on("sequence:start", (target, state, ...args) => {
-            this.prop("_index", -1);
+            this.prop("_index", 0);
             this.prop("_start", Date.now());
             this.prop("_end", null);
 
-            this.Next(...args);
+            //  Async here to break off execution from main thread to return any "sequence:start" listeners immediately
+            setTimeout(() => this.Run(...args), 10);
         });
         this.on("sequence:run", (target, state, ...args) => {
             let node = this.GetActiveNode();
             
             console.log(this.prop("_index"), this.Nodes);
 
-            node.Run();
+            let result = node.Run();
         });
         this.on("sequence:next", (target, state, ...args) => {
             let index = this.prop("_index");
@@ -50,17 +51,24 @@ export default class Sequence extends AAnimus {
         //@result:  The returned value from "node:run", if any
         this.on("sequence:listener::node:run", (node, result) => {
             //NOOP
-            console.log("<< HEARD: NODE RUN >>");
+            console.log("<< HEARD: NODE RUN >>", node.uuid);
         });
         this.on("sequence:listener::node:persist", (node, result) => {
-            console.log("<< HEARD: NODE PERSIST >>");
-            setTimeout(() => this.Run(), 100);
-            // this.Run();
+            console.log("<< HEARD: NODE PERSIST >>");            
+            if(node instanceof TimeNode) {
+                let remain = node.prop("_remaining");
+
+                if(remain > 0) {
+                    setTimeout( () => this.Run(), remain);
+                } else {
+                    this.Next();
+                }
+            }
         });
         this.on("sequence:listener::node:complete", (node, result) => {
             console.log("<< HEARD: NODE COMPLETE >>");
-            setTimeout(() => this.Next(), 100);
-            // this.Next();
+            // setTimeout(() => this.Next(), 100);
+            this.Next();
         });
 
         this.on("sequence:addNode", (target, state, node) => {
@@ -110,21 +118,21 @@ export default class Sequence extends AAnimus {
     SetNode(index, node) {
         this.Nodes[ index ] = node;
 
-        this.trigger("sequence:addNode", node);
+        this.invoke("sequence:addNode", node);
 
         return this;
     }
     AddNode(node) {
         this.Nodes.push(node);
         
-        this.trigger("sequence:addNode", node);
+        this.invoke("sequence:addNode", node);
 
         return this;
     }
     RemoveNode(index) {
         let [ node ] = this.Nodes.splice(index, 1);
 
-        this.trigger("sequence:removeNode", node);
+        this.invoke("sequence:removeNode", node);
 
         return this;
     }
@@ -144,18 +152,18 @@ export default class Sequence extends AAnimus {
     }
 
     Start(...args) {
-        this.trigger("sequence:start", ...args);
+        this.invoke("sequence:start", ...args);
 
         return this;
     }
     Run(...args) {
-        this.trigger("sequence:run", ...args);
+        this.invoke("sequence:run", ...args);
     }
     Next(...args) {
-        this.trigger("sequence:next", ...args);
+        this.invoke("sequence:next", ...args);
     }
     End(...args) {
-        this.trigger("sequence:end", ...args);
+        this.invoke("sequence:end", ...args);
 
         return this;
     }

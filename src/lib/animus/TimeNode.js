@@ -9,6 +9,8 @@ export default class TimeNode extends Node {
         this.prop("_end", null);
 
         this.on("node:run", (target, state, time) => {
+            console.log("<< NODE RUN >>", this.uuid);
+
             if(this.prop("_start") === null) {
                 this.Run();
 
@@ -20,16 +22,15 @@ export default class TimeNode extends Node {
             }
             
             if(this.prop("_start") && (time >= this.prop("_start") + this.prop("_duration"))) {
-                // console.log(this.uuid, "<< NODE COMPLETE >>");
-                this.trigger("node:complete");
-                
-                return true;
+                console.log("<< NODE COMPLETE >>", this.uuid);
+                this.invoke("node:complete");
             } else {
-                // console.log(this.uuid, "<< NODE PERSIST >>");
-                this.trigger("node:persist");
-
-                return false;
+                console.log("<< NODE PERSIST >>", this.uuid);
+                this.prop("_remaining", this.prop("_start") + this.prop("_duration") - time);
+                this.invoke("node:persist");                
             }
+
+            return this.getState();
         });
         this.on("node:complete", () => {
             this.prop("_end", Date.now());
@@ -47,11 +48,6 @@ export default class TimeNode extends Node {
             this.prop("_end", null);
         }
 
-        this.trigger("node:run");
-
-        return this;
-    }
-    Query() {
-        return this.trigger("node:run");
+        return this.invoke("node:run");
     }
 }

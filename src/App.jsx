@@ -17,6 +17,7 @@ class App extends Component {
 
         console.log(sequence);
 
+        sequence.listen("sequence:start", (target) => console.log(target));
         sequence.Start();
         // sequence.RemoveNode(0);
 

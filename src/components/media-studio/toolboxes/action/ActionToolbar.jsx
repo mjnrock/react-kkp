@@ -48,7 +48,7 @@ export default class ActionToolbar extends React.Component {
                         command={ `emoji` }
                         className={ `btn-outline-secondary pa3 pb2 btn-outline-danger` }
                     >
-                        😀
+                        <span role="img" aria-label="smile">😀</span>
                     </Button>
                     
                     <Button

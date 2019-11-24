@@ -9,7 +9,7 @@ export default class AAnimus extends AState {
         this.listeners = {};
 
         if("init" in this.events) {
-            this.trigger("init");
+            this.invoke("init");
         }
     }
 
@@ -104,5 +104,19 @@ export default class AAnimus extends AState {
         }
 
         return null;
+    }
+
+    invoke(name, ...args) {
+        let _this = this;
+        
+        return (async function main () {
+            try {
+                let result = await _this.trigger(name, ...args);
+
+                return result;
+            } catch(err){
+                return null;
+            }
+        })();
     }
 }
