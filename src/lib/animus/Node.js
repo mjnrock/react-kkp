@@ -14,7 +14,7 @@ export default class Node extends AAnimus {
             "node:run": () => true,
             "node:persist": () => true,
             "node:complete": () => true,
-        })
+        });
     }
 
     getDatum(key) {

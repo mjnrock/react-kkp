@@ -1,5 +1,4 @@
 import React from "react";
-import Emoji from "a11y-react-emoji"
 
 import Button from "components/Button";
 import Input from "components/Input";
@@ -49,7 +48,7 @@ export default class ActionToolbar extends React.Component {
                         command={ `emoji` }
                         className={ `btn-outline-secondary pa3 pb2 btn-outline-danger` }
                     >
-                        <Emoji symbol="😀"/>
+                        😀
                     </Button>
                     
                     <Button

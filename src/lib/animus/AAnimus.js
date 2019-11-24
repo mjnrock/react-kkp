@@ -1,7 +1,7 @@
 import AState from "./AState";
 
 export default class AAnimus extends AState {
-    constructor(events = {}, state = {}) {
+    constructor(state = {}, events = {}) {
         super(state);
 
         this.uuid = AAnimus.GenerateUUID();

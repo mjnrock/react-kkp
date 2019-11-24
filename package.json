@@ -3,7 +3,6 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "a11y-react-emoji": "^1.1.1",
         "babel-plugin-styled-components": "^1.5.0",
         "fabric": "^3.5.0",
         "mobx": "^3.5.1",

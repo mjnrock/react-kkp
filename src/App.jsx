@@ -8,17 +8,21 @@ import Animus from "./lib/animus/package";
 @observer
 class App extends Component {
     componentDidMount() {
-        let sequence = new Animus.Sequence();
-        let node = new Animus.TimeNode("cats", 1000);
+        let sequence = new Animus.Sequence(null, { repeat: false });
+        let node = new Animus.TimeNode("cats", 1000),
+            node2 = new Animus.TimeNode("dogs", 500);
 
         sequence.AddNode(node);
+        sequence.AddNode(node2);
 
-        node.Run();
-        sequence.RemoveNode(0);
+        console.log(sequence);
 
-        setTimeout(() => {
-            console.log(node.Query());
-        }, 2000);
+        sequence.Start();
+        // sequence.RemoveNode(0);
+
+        // setTimeout(() => {
+        //     console.log(node.Query());
+        // }, 2000);
 
 
 
